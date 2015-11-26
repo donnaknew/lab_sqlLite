@@ -15,7 +15,7 @@
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/bt_read"
         android:layout_toStartOf="@+id/bt_read"
-        android:text="insert" />
+        android:text="text" />
 
     <Button
         android:layout_width="wrap_content"
@@ -56,22 +56,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/et_num"
+        android:text="number"
         android:layout_above="@+id/bt_read"
-        android:layout_toRightOf="@+id/bt_read"
-        android:layout_alignRight="@+id/bt_delete"
-        android:layout_alignEnd="@+id/bt_delete"
-        android:text="number" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_update"
-        android:layout_above="@+id/bt_read"
-        android:layout_alignRight="@+id/list_view"
-        android:layout_alignEnd="@+id/list_view"
-        android:layout_toRightOf="@+id/bt_delete"
-        android:layout_toEndOf="@+id/bt_delete"
-        android:text="update" />
+        android:layout_alignLeft="@+id/bt_read"
+        android:layout_alignStart="@+id/bt_read"
+        android:layout_toLeftOf="@+id/bt_delete"
+        android:layout_toStartOf="@+id/bt_delete" />
 
     <Button
         android:layout_width="wrap_content"
@@ -82,4 +72,22 @@
         android:layout_toEndOf="@+id/bt_delete"
         android:layout_above="@+id/list_view"
         android:layout_toRightOf="@+id/bt_delete" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SORT"
+        android:id="@+id/bt_sort"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/bt_read"
+        android:layout_toEndOf="@+id/bt_read" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RESET"
+        android:id="@+id/bt_reset"
+        android:layout_above="@+id/bt_delete"
+        android:layout_toRightOf="@+id/bt_delete"
+        android:layout_toEndOf="@+id/bt_delete" />
 </RelativeLayout>

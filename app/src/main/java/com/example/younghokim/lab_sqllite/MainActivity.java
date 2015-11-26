@@ -25,11 +25,12 @@ public class MainActivity extends AppCompatActivity {
     // layout object
     EditText mEtName;
     EditText mEtNumberName;
-    EditText mEtUpdateName;
     Button mBtInsert;
     Button mBtRead;
     Button mBtDelete;
     Button mBtUpdate;
+    Button mBtSort;
+    Button mBtReset;
 
 
     ListView mList;
@@ -48,11 +49,12 @@ public class MainActivity extends AppCompatActivity {
 
         mEtName = (EditText) findViewById(R.id.et_text);
         mEtNumberName = (EditText)findViewById(R.id.et_num);
-        mEtUpdateName = (EditText)findViewById(R.id.et_update);
         mBtInsert = (Button) findViewById(R.id.bt_insert);
         mBtRead = (Button) findViewById(R.id.bt_read);
         mBtDelete = (Button)findViewById(R.id.bt_delete);
         mBtUpdate = (Button)findViewById(R.id.bt_update);
+        mBtSort = (Button)findViewById(R.id.bt_sort);
+        mBtReset = (Button)findViewById(R.id.bt_reset);
         ListView mList = (ListView) findViewById(R.id.list_view);
 
         mBtInsert.setOnClickListener(new View.OnClickListener() {
@@ -85,8 +87,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int updateNum = Integer.parseInt(mEtNumberName.getText().toString());
-                String updateName = mEtUpdateName.getText().toString();
+                String updateName = mEtName.getText().toString();
                 updateData(updateNum, updateName);
+            }
+        });
+        mBtSort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nameList.clear();
+                sortSelectAll();
+                baseAdapter.notifyDataSetChanged();
+            }
+        });
+        mBtReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeTable();
+                createTable();
             }
         });
 
@@ -149,6 +166,22 @@ public class MainActivity extends AppCompatActivity {
     // 모든 Data 읽기
     public void selectAll() {
         String sql = "select * from " + tableName + ";";
+        Cursor results = db.rawQuery(sql, null);
+        results.moveToFirst();
+
+        while (!results.isAfterLast()) {
+            int id = results.getInt(0);
+            String name = results.getString(1);
+//            Toast.makeText(this, "index= " + id + " name=" + name, Toast.LENGTH_LONG).show();
+            Log.d("lab_sqlite", "index= " + id + " name=" + name);
+
+            nameList.add(name);
+            results.moveToNext();
+        }
+        results.close();
+    }
+    public void sortSelectAll(){
+        String sql = "select * from " + tableName + " order by id desc" + ";";
         Cursor results = db.rawQuery(sql, null);
         results.moveToFirst();
 
